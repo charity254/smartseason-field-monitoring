@@ -37,12 +37,14 @@ export default function Fields() {
             {user?.role === 'admin' ? 'Manage and monitor all crop fields' : 'Your assigned fields'}
           </p>
         </div>
+    {user?.role === 'admin' && (
         <button
           onClick={() => navigate('/fields/create')}
           className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium"
         >
           + Create New Field
         </button>
+    )}
       </div>
 
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">

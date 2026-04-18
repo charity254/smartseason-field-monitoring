@@ -29,9 +29,6 @@ export default function Login() {
     <div className="min-h-screen bg-green-50 flex items-center justify-center">
       <div className="bg-white rounded-2xl shadow-md p-8 w-full max-w-sm">
         <div className="flex flex-col items-center mb-6">
-          <div className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center mb-3">
-            <span className="text-white text-2xl">🌱</span>
-          </div>
           <h1 className="text-2xl font-bold">SmartSeason</h1>
           <p className="text-gray-500 text-sm">Field Monitoring System</p>
         </div>
@@ -70,7 +67,7 @@ export default function Login() {
 
         <div className="mt-6 text-center text-sm text-gray-400">
           <p>Demo credentials:</p>
-          <p>Admin: admin / Admin123!</p>
+          <p>Admin: admin / admin123</p>
           <p>Agent: agent1 / Agent123!</p>
         </div>
       </div>

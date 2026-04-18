@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Navigate } from 'react-router-dom'
 import Layout from '../components/Layout'
+import { useAuth } from '../store/auth'
 import { createField, getFields } from '../api'
 import axios from 'axios'
 
@@ -15,6 +16,8 @@ export default function CreateField() {
   const [agents, setAgents] = useState([])
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const { user } = useAuth()
+  if (user?.role !== 'admin') return <Navigate to="/fields" />
 
   useEffect(() => {
     const token = localStorage.getItem('token')

@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
+from .models import User
+from .serializers import UserSerializer
 # Create your views here.
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -32,3 +34,8 @@ def login(request):
 def logout(request):
     request.user.auth_token.delete()
     return Response({'message': 'Logged out successfully'})
+
+@api_view(['GET'])
+def get_agents(request):
+    agents = User.objects.filter(role='agent')
+    return Response(UserSerializer(agents, many=True).data)
