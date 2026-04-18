@@ -49,6 +49,7 @@ export default function FieldDetail() {
 
   return (
     <Layout>
+      <button onClick={() => navigate(-1)} className="text-gray-500 mb-4 hover:underline">← Back</button>
       <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
         <div className="flex justify-between items-start mb-4">
           <div>
