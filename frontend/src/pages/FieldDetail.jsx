@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Layout from '../components/Layout'
+import { useAuth } from '../store/auth'
 import { getFields, getFieldUpdates, addFieldUpdate } from '../api'
 
 const stageBadge = {
@@ -23,6 +24,7 @@ export default function FieldDetail() {
   const [showForm, setShowForm] = useState(false)
   const [stage, setStage] = useState('growing')
   const [notes, setNotes] = useState('')
+  const { user } = useAuth()
 
   useEffect(() => {
     getFields().then(res => {
@@ -79,12 +81,14 @@ export default function FieldDetail() {
       <div className="bg-white rounded-xl shadow-sm p-6">
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-xl font-bold">Field Updates</h3>
+        {user?.role === 'agent' && (
           <button
             onClick={() => setShowForm(!showForm)}
             className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium"
           >
             + Add Update
           </button>
+        )}
         </div>
 
         {showForm && (
