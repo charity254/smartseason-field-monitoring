@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { useAuth } from '../store/auth'
 import { getFields, getFieldUpdates, addFieldUpdate } from '../api'
@@ -25,6 +25,7 @@ export default function FieldDetail() {
   const [stage, setStage] = useState('growing')
   const [notes, setNotes] = useState('')
   const { user } = useAuth()
+  const navigate = useNavigate()
 
   useEffect(() => {
     getFields().then(res => {
