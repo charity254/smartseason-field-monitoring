@@ -51,7 +51,8 @@ npm run dev
 ```
 ## Demo Credentials
 - **Admin:** admin / admin123
-- **Agent:** agent1 / Agent123!
+- **Agent1:** agent1 / Agent123!
+- **Agent2:** agent2 / Agent123!
 
 ## Design Decisions
 - Used DRF Token Authentication — simple and sufficient for a two-role system

@@ -69,6 +69,7 @@ export default function Login() {
           <p>Demo credentials:</p>
           <p>Admin: admin / admin123</p>
           <p>Agent: agent1 / Agent123!</p>
+          <p>Agent: agent2 / Agent123!</p>
         </div>
       </div>
     </div>
