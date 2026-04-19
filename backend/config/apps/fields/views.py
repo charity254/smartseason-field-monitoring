@@ -73,4 +73,8 @@ class DashboardView(APIView):
             'active': statuses.count('active'),
             'at_risk': statuses.count('at_risk'),
             'completed': statuses.count('completed'),
+            'planted': fields.filter(stage='planted').count(),
+            'growing': fields.filter(stage='growing').count(),
+            'ready': fields.filter(stage='ready').count(),
+            'harvested': fields.filter(stage='harvested').count(),
         })
