@@ -67,7 +67,7 @@ export default function Agents() {
         <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
           <h3 className="text-lg font-bold mb-4">{editingAgent ? 'Edit Agent' : 'New Agent'}</h3>
           {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-          <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {!editingAgent && (
               <div>
                 <label className="block text-sm font-medium mb-1">Username</label>
@@ -134,7 +134,7 @@ export default function Agents() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl shadow-sm overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-gray-50 text-gray-500 uppercase text-xs">
             <tr>
