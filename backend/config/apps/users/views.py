@@ -39,3 +39,69 @@ def logout(request):
 def get_agents(request):
     agents = User.objects.filter(role='agent')
     return Response(UserSerializer(agents, many=True).data)
+
+@api_view(['GET'])
+def get_agents_with_stats(request):
+    if request.user.role != User.ADMIN:
+        return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
+    agents = User.objects.filter(role='agent')
+    data = []
+    for agent in agents:
+       data.append({
+        'id': agent.id,
+        'username': agent.username,
+        'email': agent.email,
+        'phone': agent.phone,
+        'location': agent.location,
+        'is_active': agent.is_active,
+        'total_fields': agent.fields.count(),
+        'active_fields': sum(1 for f in agent.fields.all() if f.get_status() == 'active'),
+        'at_risk_fields': sum(1 for f in agent.fields.all() if f.get_status() == 'at_risk'),
+    })
+    return Response(data)
+
+@api_view(['POST'])
+def create_agent(request):
+    if request.user.role != User.ADMIN:
+        return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
+    data = request.data
+    try:
+        agent = User.objects.create_user(
+            username=data.get('username'),
+            email=data.get('email', ''),
+            password=data.get('password'),
+            role='agent',
+            phone=data.get('phone', ''),
+            location=data.get('location', ''),
+        )
+        return Response(UserSerializer(agent).data, status=status.HTTP_201_CREATED)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT'])
+def update_agent(request, pk):
+    if request.user.role != User.ADMIN:
+        return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
+    try:
+        agent = User.objects.get(pk=pk, role='agent')
+    except User.DoesNotExist:
+        return Response({'error': 'Agent not found'}, status=status.HTTP_404_NOT_FOUND)
+    agent.email = request.data.get('email', agent.email)
+    agent.phone = request.data.get('phone', agent.phone)
+    agent.location = request.data.get('location', agent.location)
+    agent.save()
+    return Response(UserSerializer(agent).data)
+
+
+@api_view(['PUT'])
+def deactivate_agent(request, pk):
+    if request.user.role != User.ADMIN:
+        return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
+    try:
+        agent = User.objects.get(pk=pk, role='agent')
+    except User.DoesNotExist:
+        return Response({'error': 'Agent not found'}, status=status.HTTP_404_NOT_FOUND)
+    agent.is_active = not agent.is_active
+    agent.save()
+    return Response({'message': 'Agent status updated', 'is_active': agent.is_active})

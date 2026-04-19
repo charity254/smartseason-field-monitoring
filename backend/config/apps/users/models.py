@@ -4,13 +4,15 @@ from django.db import models
 class User(AbstractUser):
     ADMIN = 'admin'
     AGENT = 'agent'
-
+    
     ROLE_CHOICES = [
         (ADMIN, 'Admin'),
         (AGENT, 'Field Agent'),
     ]
-
+    
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default=AGENT)
+    phone = models.CharField(max_length=20, blank=True)
+    location = models.CharField(max_length=100, blank=True)
 
     groups = models.ManyToManyField(
         'auth.Group',
@@ -22,6 +24,6 @@ class User(AbstractUser):
         blank=True,
         related_name='custom_user_set'
     )
-    
+
     def __str__(self):
         return f"{self.username} ({self.role})"
