@@ -67,9 +67,9 @@ export default function Login() {
 
         <div className="mt-6 text-center text-sm text-gray-400">
           <p>Demo credentials:</p>
-          <p>Admin: admin / admin123</p>
-          <p>Agent: agent1 / Agent123!</p>
-          <p>Agent: agent2 / Agent123!</p>
+          <p>Admin: admin/admin123</p>
+          <p>Agent: agent1/Agent123!</p>
+          <p>Agent: agent2/Agent123!</p>
         </div>
       </div>
     </div>
