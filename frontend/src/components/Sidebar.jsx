@@ -39,6 +39,16 @@ export default function Sidebar() {
         >
           {user?.role === 'admin' ? 'Fields' : 'My Fields'}
         </NavLink>
+        {user?.role === 'admin' && (
+        <NavLink
+          to="/agents"
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-4 py-3 rounded-lg mb-2 ${isActive ? 'bg-green-700' : 'hover:bg-green-800'}`
+          }
+        >
+          Agents
+        </NavLink>
+      )}
       </nav>
 
       <div className="p-4">

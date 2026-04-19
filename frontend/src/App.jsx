@@ -5,6 +5,8 @@ import Dashboard from './pages/Dashboard'
 import Fields from './pages/Fields'
 import FieldDetail from './pages/FieldDetail'
 import CreateField from './pages/CreateField'
+import Agents from './pages/Agents'
+
 
 const PrivateRoute = ({ children }) => {
   const { user } = useAuth()
@@ -21,6 +23,7 @@ export default function App() {
       <Route path="/fields" element={<PrivateRoute><Fields /></PrivateRoute>} />
       <Route path="/fields/:id" element={<PrivateRoute><FieldDetail /></PrivateRoute>} />
       <Route path="/fields/create" element={<PrivateRoute><CreateField /></PrivateRoute>} />
+      <Route path="/agents" element={<PrivateRoute><Agents /></PrivateRoute>} />
       <Route path="*" element={<Navigate to="/dashboard" />} />
     </Routes>
   )

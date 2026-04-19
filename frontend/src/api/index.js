@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://smartseason-field-monitoring-backend.onrender.com/api',
+  baseURL: 'http://127.0.0.1:8000/api',
 })
 
 api.interceptors.request.use((config) => {
@@ -20,3 +20,7 @@ export const updateField = (id, data) => api.put(`/fields/${id}/`, data)
 export const getFieldUpdates = (id) => api.get(`/fields/${id}/updates/`)
 export const addFieldUpdate = (id, data) => api.post(`/fields/${id}/updates/`, data)
 export const getDashboard = () => api.get('/dashboard/')
+export const getAgents = () => api.get('/agents/')
+export const createAgent = (data) => api.post('/agents/create/', data)
+export const updateAgent = (id, data) => api.put(`/agents/${id}/update/`, data)
+export const deactivateAgent = (id) => api.put(`/agents/${id}/deactivate/`)
