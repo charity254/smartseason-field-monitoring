@@ -4,10 +4,11 @@ from .models import Field, FieldUpdate
 
 class FieldUpdateSerializer(serializers.ModelSerializer):
     agent_name = serializers.CharField(source='agent.username', read_only=True)
-
+    field_name = serializers.CharField(source='field.name', read_only=True)
+    
     class Meta:
         model = FieldUpdate
-        fields = ['id', 'stage', 'notes', 'agent_name', 'created_at']
+        fields = ['id', 'stage', 'notes', 'agent_name', 'field_name', 'created_at']
 
 
 class FieldSerializer(serializers.ModelSerializer):

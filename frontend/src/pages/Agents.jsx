@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Layout from '../components/Layout'
 import { getAgents, createAgent, updateAgent, deactivateAgent } from '../api'
+import { useNavigate } from 'react-router-dom'
 
 export default function Agents() {
   const [agents, setAgents] = useState([])
@@ -8,6 +9,7 @@ export default function Agents() {
   const [editingAgent, setEditingAgent] = useState(null)
   const [form, setForm] = useState({ username: '', email: '', password: '', phone: '', location: '' })
   const [error, setError] = useState('')
+  const navigate = useNavigate()
 
   const fetchAgents = () => getAgents().then(res => setAgents(res.data))
 
@@ -47,6 +49,7 @@ export default function Agents() {
 
   return (
     <Layout>
+      <button onClick={() => navigate(-1)} className="text-gray-500 mb-4 hover:underline">← Back</button>
       <div className="flex justify-between items-center mb-6">
         <div>
           <h2 className="text-2xl font-bold">Agent Management</h2>

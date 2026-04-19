@@ -1,3 +1,4 @@
+import RecentUpdates from '../components/RecentUpdates'
 import { useState, useEffect } from 'react'
 import Layout from '../components/Layout'
 import { getDashboard } from '../api'
@@ -103,6 +104,13 @@ export default function Dashboard() {
           </div>
         </div>
       )}
+    {user?.role === 'agent' && (
+    <div className="bg-white rounded-xl shadow-sm p-6 mt-6">
+      <h3 className="text-lg font-bold mb-1">Recent Updates</h3>
+      <p className="text-gray-500 text-sm mb-4">Your latest field observations</p>
+      <RecentUpdates />
+    </div>
+  )}
     </Layout>
   )
 }

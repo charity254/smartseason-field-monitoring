@@ -78,3 +78,14 @@ class DashboardView(APIView):
             'ready': fields.filter(stage='ready').count(),
             'harvested': fields.filter(stage='harvested').count(),
         })
+
+from rest_framework.decorators import api_view
+
+@api_view(['GET'])
+def recent_updates(request):
+    from .models import FieldUpdate
+    if request.user.role == 'admin':
+        updates = FieldUpdate.objects.all().order_by('-created_at')[:5]
+    else:
+        updates = FieldUpdate.objects.filter(agent=request.user).order_by('-created_at')[:5]
+    return Response(FieldUpdateSerializer(updates, many=True).data)
