@@ -9,4 +9,5 @@ urlpatterns = [
     path('agents/create/', views.create_agent, name='create-agent'),
     path('agents/<int:pk>/update/', views.update_agent, name='update-agent'),
     path('agents/<int:pk>/deactivate/', views.deactivate_agent, name='deactivate-agent'),
+    path('profile/', views.get_profile, name='profile'),
 ]

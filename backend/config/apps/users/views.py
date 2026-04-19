@@ -105,3 +105,7 @@ def deactivate_agent(request, pk):
     agent.is_active = not agent.is_active
     agent.save()
     return Response({'message': 'Agent status updated', 'is_active': agent.is_active})
+
+@api_view(['GET'])
+def get_profile(request):
+    return Response(UserSerializer(request.user).data)

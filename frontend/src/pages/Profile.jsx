@@ -1,10 +1,17 @@
+import { useState, useEffect } from 'react'
 import { useAuth } from '../store/auth'
 import Layout from '../components/Layout'
 import { useNavigate } from 'react-router-dom'
+import { getProfile } from '../api'
 
 export default function Profile() {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const [profile, setProfile] = useState(null)
+
+  useEffect(() => {
+    getProfile().then(res => setProfile(res.data))
+  }, [])
 
   return (
     <Layout>
@@ -26,15 +33,23 @@ export default function Profile() {
         <div className="space-y-4">
           <div className="bg-gray-50 rounded-lg p-4">
             <p className="text-gray-500 text-sm">Username</p>
-            <p className="font-semibold mt-1">{user?.username}</p>
+            <p className="font-semibold mt-1">{profile?.username}</p>
           </div>
           <div className="bg-gray-50 rounded-lg p-4">
             <p className="text-gray-500 text-sm">Email</p>
-            <p className="font-semibold mt-1">{user?.email || 'No email set'}</p>
+            <p className="font-semibold mt-1">{profile?.email || 'No email set'}</p>
+          </div>
+          <div className="bg-gray-50 rounded-lg p-4">
+            <p className="text-gray-500 text-sm">Phone</p>
+            <p className="font-semibold mt-1">{profile?.phone || 'No phone set'}</p>
+          </div>
+          <div className="bg-gray-50 rounded-lg p-4">
+            <p className="text-gray-500 text-sm">Location</p>
+            <p className="font-semibold mt-1">{profile?.location || 'No location set'}</p>
           </div>
           <div className="bg-gray-50 rounded-lg p-4">
             <p className="text-gray-500 text-sm">Role</p>
-            <p className="font-semibold mt-1 capitalize">{user?.role}</p>
+            <p className="font-semibold mt-1 capitalize">{profile?.role}</p>
           </div>
         </div>
       </div>
