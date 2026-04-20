@@ -3,7 +3,7 @@
 A web application for tracking crop progress across multiple fields during a growing season.
 
 ## Live Demo
-https://smartseason-field-monitoring-zjhd.onrender.com
+🌎 https://smartseason-field-monitoring-zjhd.onrender.com
 
 ## Tech Stack
 - **Backend:** Django + Django REST Framework
